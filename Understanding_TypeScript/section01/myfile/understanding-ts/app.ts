@@ -1,48 +1,71 @@
-console.log("-Hello TypeScript-");
+// [型の利用：object,Array]--------------------------------------------------------
+var person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  // Tuple型を利用するときに型を明示しておくことで厳密な配列を作成することができる
+  role: [number, string];
+} = {
+  name: "yota",
+  age: 20,
+  // Arrayの利用
+  hobbies: ["Sports", "Cooking"],
+  role: [2, "AUTHOR"],
+};
 
-// 変数定義--------------------------------------------------
-const number1 = 5;
-// const number1 = "5"; // 型numberじゃないため、エラーとなる。
-let number2 = 2.8;
-number2 = 3;
-// number2 = "STRING"; // 型推論によりnumber2はnumber型のため文字列を入れようとするとエラーとなる。
-const printResult = true;
-const resultPhrase = "Result:";
+// 明示されている型と一致しているのでOK
+person.role = [0, "admin"];
+// 明示されている型と一致していないのでNG
+// person.role = [0,'admin','user'];
+// person.role = ['user',1];
 
-// any型 どんな値でも格納することができる
-let any_test:any ;
-any_test=1;
-any_test="STRING";
-any_test=true;
+console.log(person.name);
+console.log("------------------------------------------");
 
-// ---------------------------------------------------------
-
-/**
- * 型の利用
- * @param n1
- * @param n2
- */
-// [型の利用：number,boolean,string]--------------------------------------------------------
-// 引数に型(numberなど）を指定することでそれ以外（numberに文字列が入っている場合など）を入れた場合にエラーとなる
-function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-  // [typeof演算子]-----------------------------------------------------------
-  //   // JavaScriptで入力値をチェックする方法（実行しないとわからない）
-  //   if (typeof n1 !== "number" || typeof n2 !== "number") {
-  //     throw new Error("入力値が正しくありません");
-  //   }
-  // TypeScriptで入力値を確認する方法（実行しなくてもエラーに気がつくことができる）
-  // [typeof演算子]データ型の種類を教えてくれる
-  console.log("▼[typeof演算子]データ型の種類を教えてくれる");
-  console.log("[n1]" + typeof n1 + "/" + "[n2]" + typeof n2);
-  console.log("------------------------------------------");
-  // -----------------------------------------------------------------------
-  const result = n1 + n2;
-  if (showResult) {
-    console.log(phrase + result); // 5 + 2.8 = 7.8
-  } else {
-    return result;
-  }
+// 変数としてArray型を使う
+let favoriteActivities: string[];
+favoriteActivities = ["Sports"];
+for (const hobby of person.hobbies) {
+  console.log(hobby);
+  console.log(hobby.toUpperCase());
 }
+console.log("------------------------------------------");
 
-add(number1, number2, printResult, resultPhrase);
-// -----------------------------------------------------------------------
+const product = {
+  id: "abc1",
+  price: 12.99,
+  tags: ["great-offer", "hot-and-new"],
+  details: {
+    title: "Red Carpet",
+    description: "A great carpet - almost brand-new!",
+  },
+};
+
+console.log(product);
+console.log("------------------------------------------");
+
+// [型の利用：Enum]--------------------------------------------------------
+// カスタム型の定義
+enum Role {
+  // 以下の定数には自動で数値が付与される
+  ADMIN, // 0が付与
+  READ_ONLY, // 1が付与
+  AUTHOR, // 2が付与
+  // 以下のように任意に指定することも可能
+  // ADMIN = 5, // 5が付与
+  // READ_ONLY , // オートインクリメントにより6が付与
+  // AUTHOR = 'AUTHOR', // 文字列'AUTHOR'が付与
+}
+console.log(Role[0]);
+console.log(Role[1]);
+console.log(Role[2]);
+
+const person2 = {
+  role: Role[0],
+};
+if (person2.role === Role[0]) {
+  console.log("管理者ユーザー");
+} else {
+  console.log("管理者ユーザーではありません");
+}
+console.log("------------------------------------------");

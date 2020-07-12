@@ -1,44 +1,61 @@
-console.log("-Hello TypeScript-");
-// 変数定義--------------------------------------------------
-var number1 = 5;
-// const number1 = "5"; // 型numberじゃないため、エラーとなる。
-var number2 = 2.8;
-number2 = 3;
-// number2 = "STRING"; // 型推論によりnumber2はnumber型のため文字列を入れようとするとエラーとなる。
-var printResult = true;
-var resultPhrase = "Result:";
-// any型 どんな値でも格納することができる
-var any_test;
-any_test = 1;
-any_test = "STRING";
-any_test = true;
-// ---------------------------------------------------------
-/**
- * 型の利用
- * @param n1
- * @param n2
- */
-// [型の利用：number,boolean,string]--------------------------------------------------------
-// 引数に型(numberなど）を指定することでそれ以外（numberに文字列が入っている場合など）を入れた場合にエラーとなる
-function add(n1, n2, showResult, phrase) {
-    // [typeof演算子]-----------------------------------------------------------
-    //   // JavaScriptで入力値をチェックする方法（実行しないとわからない）
-    //   if (typeof n1 !== "number" || typeof n2 !== "number") {
-    //     throw new Error("入力値が正しくありません");
-    //   }
-    // TypeScriptで入力値を確認する方法（実行しなくてもエラーに気がつくことができる）
-    // [typeof演算子]データ型の種類を教えてくれる
-    console.log("▼[typeof演算子]データ型の種類を教えてくれる");
-    console.log("[n1]" + typeof n1 + "/" + "[n2]" + typeof n2);
-    console.log("------------------------------------------");
-    // -----------------------------------------------------------------------
-    var result = n1 + n2;
-    if (showResult) {
-        console.log(phrase + result); // 5 + 2.8 = 7.8
-    }
-    else {
-        return result;
-    }
+// [型の利用：object,Array]--------------------------------------------------------
+var person = {
+    name: "yota",
+    age: 20,
+    // Arrayの利用
+    hobbies: ["Sports", "Cooking"],
+    role: [2, "AUTHOR"]
+};
+// 明示されている型と一致しているのでOK
+person.role = [0, "admin"];
+// 明示されている型と一致していないのでNG
+// person.role = [0,'admin','user'];
+// person.role = ['user',1];
+console.log(person.name);
+console.log("------------------------------------------");
+// 変数としてArray型を使う
+var favoriteActivities;
+favoriteActivities = ["Sports"];
+for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
+    var hobby = _a[_i];
+    console.log(hobby);
+    console.log(hobby.toUpperCase());
 }
-add(number1, number2, printResult, resultPhrase);
-// -----------------------------------------------------------------------
+console.log("------------------------------------------");
+var product = {
+    id: "abc1",
+    price: 12.99,
+    tags: ["great-offer", "hot-and-new"],
+    details: {
+        title: "Red Carpet",
+        description: "A great carpet - almost brand-new!"
+    }
+};
+console.log(product);
+console.log("------------------------------------------");
+// [型の利用：Enum]--------------------------------------------------------
+// カスタム型の定義
+var Role;
+(function (Role) {
+    // 以下の定数には自動で数値が付与される
+    Role[Role["ADMIN"] = 0] = "ADMIN";
+    Role[Role["READ_ONLY"] = 1] = "READ_ONLY";
+    Role[Role["AUTHOR"] = 2] = "AUTHOR";
+    // 以下のように任意に指定することも可能
+    // ADMIN = 5, // 5が付与
+    // READ_ONLY , // オートインクリメントにより6が付与
+    // AUTHOR = 'AUTHOR', // 文字列'AUTHOR'が付与
+})(Role || (Role = {}));
+console.log(Role[0]);
+console.log(Role[1]);
+console.log(Role[2]);
+var person2 = {
+    role: Role[0]
+};
+if (person2.role === Role[0]) {
+    console.log("管理者ユーザー");
+}
+else {
+    console.log("管理者ユーザーではありません");
+}
+console.log("------------------------------------------");
