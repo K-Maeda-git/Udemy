@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1594647776728" clover="3.2.0">
+  <project timestamp="1594647776728" name="All files">
+    <metrics statements="17" coveredstatements="17" conditionals="16" coveredconditionals="15" methods="4" coveredmethods="4" elements="37" coveredelements="36" complexity="0" loc="17" ncloc="17" packages="1" files="1" classes="1"/>
+    <file name="fizzbuzz.js" path="C:\work\Practice_TypeScript\test_demo\modules\fizzbuzz.js">
+      <metrics statements="17" coveredstatements="17" conditionals="16" coveredconditionals="15" methods="4" coveredmethods="4"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="5" count="4" type="cond" truecount="4" falsecount="0"/>
+      <line num="6" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="13" count="6" type="cond" truecount="1" falsecount="1"/>
+      <line num="14" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="20" count="7" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="4" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
