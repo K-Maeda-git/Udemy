@@ -3,7 +3,9 @@
 2020/07/07 -> 進行：section1-8/次回：section2-1  
 2020/07/09 -> 進行：section2-14/次回：section2-15  
 2020/07/12 -> 進行：section2-19/次回：section2-20  
-2020/07/15 -> 進行：section3-34/次回：section3-35
+2020/07/15 -> 進行：section3-34/次回：section3-35  
+2020/07/16 -> 進行：section3-46/次回：section4-01  
+※3-44 デバッグツールに関する解説があるので次回メモを取ること
 
 # udemy 学習メモ
 
@@ -18,6 +20,7 @@
 2. 作成したフォルダ内に HTML ファイルを作成  
    [cd]でフォルダ直下に移動し、`index.html`を作成  
    以下のコードをコピペ
+
    ```
    <!DOCTYPE html>
    <html lang="ja">
@@ -33,6 +36,7 @@
    </body>
    </html>
    ```
+
 3. npm を用意する  
    以下コマンドを実行して`package.json`を作成
    ```
