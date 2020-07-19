@@ -39,6 +39,42 @@
   以下コマンドを実行すると、プロジェクト内のすべての.ts ファイルをコンパイルすることもできる
   ```
   tsc
-  ``` 
+  ```
+
+### Visual Studio Code を利用してデバッグする方法     
+※Debugの実行がうまく行かなかったため設定だけした
+
+1. [拡張機能]Debugger for Chrome をインストール  
+   VSCode 上でデバックを可能にする拡張機能
+2. tsconfig.json を編集する  
+   sourceMap を[true]に変更する
+
+   ```
+   // デバッグに役立つ設定（.mapファイルを生成して.ts->.jsをコンパイルした際の対応付を記録）
+   "sourceMap": true, 　/* Generates corresponding '.map' file. */
+   ```
+
+3. 検証したい箇所にブレークポイントを設定する
+   動作を確認したいコードにブレークポイント（該当する行の赤丸をクリック）を設定すると  
+   デバッグを開始した際に該当箇所で止まり動作を確認することができる
+
+4. デバッグを開始するために必要な初期設定  
+   「VSCode の実行＞デバッグの開始」を選択    
+   最初に開始した際は環境の選択を求められるので「chrome」を選択   
+   `launch.json`が自動生成されるので以下のようにurlのポート番号を変更する   
+   ※デバッグを開始する前に予めサーバーを起動しておく必要がある（npm startでlite serverを起動しておく）    
+   ```
+   "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:3000", // 開発用サーバーで起動する番号に合わせる
+            "webRoot": "${workspaceFolder}"
+        }
+    ```
+  5. デバッグを開始する   
+    `tsc`でコンパイルを行い.jsファイルと.js.mapファイルが生成されることを確認する   
+    
+
 ---
- 
