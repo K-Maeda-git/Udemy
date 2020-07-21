@@ -5,8 +5,8 @@ class Department {
         this.name = name;
         this.employees = [];
     }
-    describe() {
-        console.log(`Department:${this.id}: ${this.name}`);
+    static crateEmployee(name) {
+        return { name: name };
     }
     addEmployee(employee) {
         this.employees.push(employee);
@@ -16,31 +16,54 @@ class Department {
         console.log(this.employees);
     }
 }
-const accounting = new Department(`d1`, `会計`);
-console.log(accounting);
-accounting.describe();
+Department.fiscalYear = 2020;
 console.log("-------------------------------------");
-accounting.addEmployee("Dominic");
-accounting.addEmployee("Brian");
-accounting.printEmployeeInfometion();
+const employee1 = Department.crateEmployee("Dominic");
+console.log(employee1, Department.fiscalYear);
 console.log("-------------------------------------");
 class ITDepartment extends Department {
     constructor(id, admins) {
         super(id, "IT");
         this.admins = admins;
     }
+    describe() {
+        console.log('IT部門 - ID:' + this.id);
+    }
 }
 const it = new ITDepartment("d1", ["Letty"]);
 console.log(it);
 it.describe();
-console.log("-------------------------------------");
 class AccountingDepatment extends Department {
     constructor(id, reports) {
-        super(id, "accounting");
+        super(id, "Accounting");
         this.reports = reports;
+        this.lastReport = this.reports[0];
+    }
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error(`レポートが見つかりません`);
+    }
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error("正しい値を設定してください");
+        }
+        this.addReport(value);
     }
     addReport(text) {
         this.reports.push(text);
+        this.lastReport = text;
+    }
+    static getInstance() {
+        if (this.instance) {
+            this.instance;
+        }
+        this.instance = new AccountingDepatment('d2', []);
+        return this.instance;
+    }
+    describe() {
+        console.log("会計部門 - ID:" + this.id);
     }
     printReports() {
         console.log(this.reports);
@@ -52,11 +75,16 @@ class AccountingDepatment extends Department {
         this.employees.push(name);
     }
 }
-const accountingDM = new AccountingDepatment("d2", []);
-accountingDM.addReport("hello there");
-accountingDM.printReports();
-accountingDM.addEmployee("Letty");
-accountingDM.addEmployee("Roman");
-accountingDM.printEmployeeInfometion();
+const accounting1 = AccountingDepatment.getInstance();
+const accounting2 = AccountingDepatment.getInstance();
+console.log(accounting1, accounting2);
+console.log("-------------------------------------");
+accounting1.addReport("hello there");
+console.log(accounting1.mostRecentReport);
+console.log("-------------------------------------");
+accounting1.mostRecentReport = "通期会計レポート";
+accounting1.addEmployee("Letty");
+accounting1.addEmployee("Roman");
+accounting1.describe();
 console.log("-------------------------------------");
 //# sourceMappingURL=app.js.map
