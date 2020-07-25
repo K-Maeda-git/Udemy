@@ -1,10 +1,10 @@
-import { skipCheck } from "../time_diffrence";
+import { checkSkipService } from "../time_diffrence";
 
 describe("skipCheckの戻り値", () => {
   // test("戻り値がtrueの場合", () => {
-  //   expect(skipCheck()).toBeTruthy();
+  //   expect(checkSkipService.skipCheck()).toBeTruthy();
   // });
   test("戻り値がfalseの場合", () => {
-    expect(skipCheck()).toBeFalsy();
+    expect(checkSkipService.skipCheck()).toBeFalsy();
   });
 });
