@@ -1,3 +1,47 @@
+// Project State Management（状態管理をする）
+class ProjectState {
+  private listeners: any[] = [];
+  private projects: any[] = [];
+  // インスタンスを保持するためのプロパティ
+  private static instance: ProjectState;
+
+  // シングルトン
+  private constructor() {}
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    // インスタンスがない場合には新規に作成
+    this.instance = new ProjectState();
+    return this.instance;
+  }
+
+  // リスナーを追加するためのメソッド
+  addListener(listenerFn: Function) {
+    this.listeners.push(listenerFn);
+  }
+
+  // リストにプロジェクトを追加するメソッド
+  addProject(title: string, description: string, manday: number) {
+    // 新しいプロジェクトのオブジェクトを作成
+    const newProject = {
+      id: Math.random().toString(),
+      title: title,
+      description: description,
+      manday: manday,
+    };
+    // オブジェクトをリストに追加する
+    this.projects.push(newProject);
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice());
+    }
+  }
+}
+
+// グローバルオブジェクト
+const projectState = ProjectState.getInstance();
+
 // Validation
 interface Validatable {
   value: string | number;
@@ -63,8 +107,79 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   // 新しいディスクリプターを返す
   return adjDescripor;
 }
+// ProjectList Class(プロジェクトのリストを表示)
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLElement;
+  assignedProjects: any[];
 
-// ProjectInput class
+  constructor(private type: "active" | "finished") {
+    // テンプレート要素への参照
+    this.templateElement = document.getElementById(
+      "project-list"
+    )! as HTMLTemplateElement; //[HTMLTemplateElement]を型キャスト
+
+    // テンプレートを表示する親要素への参照
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+
+    // 空の配列で初期化
+    this.assignedProjects = [];
+
+    // テンプレートをHTMLにインポート
+    // importNodeメソッドを使ってテンプレートの内容をインポートしている
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    // インポートしたテンプレートの最初の子要素を格納している
+    this.element = importedNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+
+    // メソッドを呼び出し
+    projectState.addListener((projects: any[]) => {
+      this.assignedProjects = projects;
+      this.renderProject();
+    });
+
+    this.attach();
+    this.renderContent();
+  }
+
+  // プロジェクトを表示する処理
+  private renderProject() {
+    // リストの要素を取得
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement;
+    for (const prjItem of this.assignedProjects) {
+      // リストの項目を作成
+      const listItem = document.createElement("li");
+      // タイトルを設定
+      listItem.textContent = prjItem.title;
+      listEl.appendChild(listItem);
+    }
+  }
+
+  // タグにidを付与する処理
+  private renderContent() {
+    // idの文字列を格納
+    const listId = `${this.type}-projects-list`;
+    // ulタグを取得
+    this.element.querySelector("ul")!.id = listId;
+    // h2タグを取得して[active]時は実行中プロジェクト[finished]時は完了プロジェクトを設定
+    this.element.querySelector("h2")!.textContent =
+      this.type === "active" ? "実行中プロジェクト" : "完了プロジェクト";
+  }
+
+  // 画面に表示する処理
+  private attach() {
+    // hostElementに要素を追加する
+    this.hostElement.insertAdjacentElement("beforeend", this.element);
+  }
+}
+
+// ProjectInput class(フォームの表示と入力値の取得)
 class ProjectInput {
   // プロパティの追加
   templateElement: HTMLTemplateElement;
@@ -163,7 +278,7 @@ class ProjectInput {
     const userInput = this.gatherUserInput();
     if (Array.isArray(userInput)) {
       const [title, desc, manday] = userInput;
-      console.log(title, desc, manday);
+      projectState.addProject(title, desc, manday);
       this.clearInputs();
     }
   }
@@ -185,5 +300,7 @@ class ProjectInput {
 
 // インスタンス作成
 const prjInput = new ProjectInput();
+const activePrjList = new ProjectList("active");
+const finishedPrjList = new ProjectList("finished");
 
 // ("-------------------------------------------------------");
