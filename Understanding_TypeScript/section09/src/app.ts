@@ -1,12 +1,56 @@
+// Drag&Drop(ドラッグ＆ドロップ機能の実装)
+// ドラッグできるコンポーネントのクラスに実装するインターフェイス
+interface Draggable {
+  dragStartHandler(event: DragEvent): void;
+  dragEndHandler(event: DragEvent): void;
+}
+// ドロップできる場所
+interface DragTarget {
+  // ドロップする場所が有効かをブラウザに伝えるためのイベントハンドラー
+  dragOverHandler(event: DragEvent): void;
+  // ドロップするときのイベントハンドラー（データや画面を更新する）
+  dropHandler(event: DragEvent): void;
+  // ビジュアル上のフィードバッグを行うためのイベントハンドラー
+  dragLeaveHandler(event: DragEvent): void;
+}
+
+// Project Type(projectsの型をクラスで定義する)
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public manday: number,
+    public status: ProjectStatus
+  ) {}
+}
+
+// カスタム型（listenersの型を定義する）
+type Listener<T> = (items: T[]) => void;
+
+class State<T> {
+  protected listeners: Listener<T>[] = [];
+  // リスナーを追加するためのメソッド
+  addListener(listenerFn: Listener<T>) {
+    this.listeners.push(listenerFn);
+  }
+}
+
 // Project State Management（状態管理をする）
-class ProjectState {
-  private listeners: any[] = [];
-  private projects: any[] = [];
+class ProjectState extends State<Project> {
+  private projects: Project[] = [];
   // インスタンスを保持するためのプロパティ
   private static instance: ProjectState;
 
   // シングルトン
-  private constructor() {}
+  private constructor() {
+    super();
+  }
 
   static getInstance() {
     if (this.instance) {
@@ -17,20 +61,17 @@ class ProjectState {
     return this.instance;
   }
 
-  // リスナーを追加するためのメソッド
-  addListener(listenerFn: Function) {
-    this.listeners.push(listenerFn);
-  }
-
   // リストにプロジェクトを追加するメソッド
   addProject(title: string, description: string, manday: number) {
     // 新しいプロジェクトのオブジェクトを作成
-    const newProject = {
-      id: Math.random().toString(),
-      title: title,
-      description: description,
-      manday: manday,
-    };
+    const newProject = new Project(
+      Math.random().toString(),
+      title,
+      description,
+      manday,
+      // デフォルトで[Active]
+      ProjectStatus.Active
+    );
     // オブジェクトをリストに追加する
     this.projects.push(newProject);
     for (const listenerFn of this.listeners) {
@@ -56,7 +97,7 @@ function validate(validatableInput: Validatable) {
   let isValid = true;
   if (validatableInput.required) {
     // 必須チェック
-    isValid = isValid && validatableInput.value.toString().trim().length != 0;
+    isValid = isValid && validatableInput.value.toString().trim().length !== 0;
   }
   if (
     validatableInput.minLength != null &&
@@ -96,7 +137,7 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   // オリジナル関数の取得
   const originalMethod = descriptor.value;
   // 設定変更後のディスクリプターを作成
-  const adjDescripor: PropertyDescriptor = {
+  const adjDescriptor: PropertyDescriptor = {
     // ディスクリプターの設定
     configurable: true,
     get() {
@@ -105,26 +146,27 @@ function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
     },
   };
   // 新しいディスクリプターを返す
-  return adjDescripor;
+  return adjDescriptor;
 }
-// ProjectList Class(プロジェクトのリストを表示)
-class ProjectList {
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLElement;
-  assignedProjects: any[];
 
-  constructor(private type: "active" | "finished") {
+// Component Class(abstractクラス：親クラス)
+abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
+
+  constructor(
+    templateId: string,
+    hostElementId: string,
+    insertAtStart: boolean,
+    newElementId?: string // 任意の引数は最後に持ってくる
+  ) {
     // テンプレート要素への参照
     this.templateElement = document.getElementById(
-      "project-list"
+      templateId
     )! as HTMLTemplateElement; //[HTMLTemplateElement]を型キャスト
-
     // テンプレートを表示する親要素への参照
-    this.hostElement = document.getElementById("app")! as HTMLDivElement;
-
-    // 空の配列で初期化
-    this.assignedProjects = [];
+    this.hostElement = document.getElementById(hostElementId)! as T;
 
     // テンプレートをHTMLにインポート
     // importNodeメソッドを使ってテンプレートの内容をインポートしている
@@ -133,36 +175,117 @@ class ProjectList {
       true
     );
     // インポートしたテンプレートの最初の子要素を格納している
-    this.element = importedNode.firstElementChild as HTMLElement;
-    this.element.id = `${this.type}-projects`;
-
-    // メソッドを呼び出し
-    projectState.addListener((projects: any[]) => {
-      this.assignedProjects = projects;
-      this.renderProject();
-    });
-
-    this.attach();
-    this.renderContent();
+    this.element = importedNode.firstElementChild as U;
+    if (newElementId) {
+      this.element.id = newElementId;
+    }
+    this.attach(insertAtStart);
   }
 
-  // プロジェクトを表示する処理
-  private renderProject() {
-    // リストの要素を取得
-    const listEl = document.getElementById(
-      `${this.type}-projects-list`
-    )! as HTMLUListElement;
-    for (const prjItem of this.assignedProjects) {
-      // リストの項目を作成
-      const listItem = document.createElement("li");
-      // タイトルを設定
-      listItem.textContent = prjItem.title;
-      listEl.appendChild(listItem);
+  abstract configure(): void;
+  abstract renderContent(): void;
+
+  // 画面に表示する処理
+  private attach(insertAtBeginning: boolean) {
+    // hostElementに要素を追加する
+    this.hostElement.insertAdjacentElement(
+      insertAtBeginning ? "afterbegin" : "beforeend",
+      this.element
+    );
+  }
+}
+
+// ProjectItem Class(各プロジェクトをリストの項目として表示する)
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>
+  implements Draggable {
+  private project: Project;
+
+  // ゲッター
+  get manday() {
+    if (this.project.manday < 20) {
+      return this.project.manday.toString() + "人日";
+    } else {
+      return (this.project.manday / 20).toString() + "人月";
     }
   }
 
+  constructor(hostId: string, project: Project) {
+    super("single-project", hostId, false, project.id);
+    this.project = project;
+
+    this.configure();
+    this.renderContent();
+  }
+  @autobind
+  dragStartHandler(event: DragEvent) {
+    console.log(event);
+  }
+  dragEndHandler(_: DragEvent) {
+    console.log("ドラッグ終了");
+  }
+
+  configure() {
+    this.element.addEventListener("dragstart", this.dragStartHandler);
+    this.element.addEventListener("dragend", this.dragEndHandler);
+  }
+
+  // h2,h3,pタグを取得してテキストを設定する
+  renderContent() {
+    this.element.querySelector("h2")!.textContent = this.project.title;
+    // ゲッター関数（get manday）が実行される
+    this.element.querySelector("h3")!.textContent = this.manday;
+    this.element.querySelector("p")!.textContent = this.project.description;
+  }
+}
+
+// ProjectList Class(プロジェクトのリストを表示)
+class ProjectList extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget {
+  assignedProjects: Project[];
+
+  constructor(private type: "active" | "finished") {
+    super("project-list", "app", false, `${type}-projects`); // ベースクラスのコンストラクターを呼び出す
+    // 空の配列で初期化
+    this.assignedProjects = [];
+
+    this.configure();
+    this.renderContent();
+  }
+
+  @autobind
+  dragOverHandler(_: DragEvent) {
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.add("droppable");
+  }
+
+  dropHandler(_: DragEvent) {}
+
+  @autobind
+  dragLeaveHandler(_: DragEvent) {
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
+
+  configure() {
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("drop", this.dropHandler);
+    this.element.addEventListener("dragleave", this.dragLeaveHandler);
+    // メソッドを呼び出し
+    projectState.addListener((projects: Project[]) => {
+      // フィルターで絞り込み
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        }
+        return prj.status === ProjectStatus.Finished;
+      });
+      this.assignedProjects = relevantProjects;
+      this.renderProjects();
+    });
+  }
+
   // タグにidを付与する処理
-  private renderContent() {
+  renderContent() {
     // idの文字列を格納
     const listId = `${this.type}-projects-list`;
     // ulタグを取得
@@ -172,41 +295,51 @@ class ProjectList {
       this.type === "active" ? "実行中プロジェクト" : "完了プロジェクト";
   }
 
-  // 画面に表示する処理
-  private attach() {
-    // hostElementに要素を追加する
-    this.hostElement.insertAdjacentElement("beforeend", this.element);
+  // プロジェクトを表示する処理
+  private renderProjects() {
+    // リストの要素を取得
+    const listEl = document.getElementById(
+      `${this.type}-projects-list`
+    )! as HTMLUListElement; // [ul]タグを取得
+    // リストをクリアする
+    listEl.innerHTML = "";
+    for (const prjItem of this.assignedProjects) {
+      new ProjectItem(listEl.id, prjItem);
+      // // リストの項目を作成
+      // const listItem = document.createElement("li");
+      // // タイトルを設定
+      // listItem.textContent = prjItem.title;
+      // listEl.appendChild(listItem);
+    }
   }
 }
 
 // ProjectInput class(フォームの表示と入力値の取得)
-class ProjectInput {
+class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   // プロパティの追加
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLFormElement;
   titleInputElement: HTMLInputElement;
   descriptionInputElement: HTMLInputElement;
   mandayInputElement: HTMLInputElement;
 
   constructor() {
-    // テンプレート要素への参照
-    this.templateElement = document.getElementById(
-      "project-input"
-    )! as HTMLTemplateElement; //[HTMLTemplateElement]を型キャスト
-    // テンプレートを表示する親要素への参照
-    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+    super("project-input", "app", true, "user-input");
+    // // テンプレート要素への参照
+    // this.templateElement = document.getElementById(
+    //   "project-input"
+    // )! as HTMLTemplateElement; //[HTMLTemplateElement]を型キャスト
+    // // テンプレートを表示する親要素への参照
+    // this.hostElement = document.getElementById("app")! as HTMLDivElement;
 
-    // テンプレートをインポート
-    // importNodeメソッドを使ってテンプレートの内容をインポートしている
-    const importedNode = document.importNode(
-      this.templateElement.content,
-      true
-    );
-    // インポートしたテンプレートの最初の子要素を格納している（ここではフォーム）
-    this.element = importedNode.firstElementChild as HTMLFormElement;
-    // DOMの要素にアクセスしてidを与えることでcssを適用している？
-    this.element.id = "user-input";
+    // // テンプレートをインポート
+    // // importNodeメソッドを使ってテンプレートの内容をインポートしている
+    // const importedNode = document.importNode(
+    //   this.templateElement.content,
+    //   true
+    // );
+    // // インポートしたテンプレートの最初の子要素を格納している（ここではフォーム）
+    // this.element = importedNode.firstElementChild as HTMLFormElement;
+    // // DOMの要素にアクセスしてidを与えることでcssを適用している？
+    // this.element.id = "user-input";
 
     // 入力項目の取得
     this.titleInputElement = this.element.querySelector(
@@ -220,22 +353,31 @@ class ProjectInput {
     ) as HTMLInputElement;
 
     this.configure();
-    this.attach();
   }
+  // メソッドの追加
+  configure() {
+    // イベントリスナーの設定
+    // フォームがsubmitされたらsubmitHandlerが呼ばれる
+    // this.element.addEventListener("submit", this.submitHandler.bind(this));
+    this.element.addEventListener("submit", this.submitHandler);
+  }
+
+  // 抽象クラスの制約を満たすために設置
+  renderContent() {}
 
   // 入力値を受け取るメソッド
   private gatherUserInput(): [string, string, number] | void {
     // 各項目の入力値を取得
     const enteredTitle = this.titleInputElement.value;
-    const enteredDescripor = this.descriptionInputElement.value;
+    const enteredDescription = this.descriptionInputElement.value;
     const enteredManday = this.mandayInputElement.value;
 
     const titleValidatable: Validatable = {
       value: enteredTitle,
       required: true,
     };
-    const descriptorValidatable: Validatable = {
-      value: enteredDescripor,
+    const descriptionValidatable: Validatable = {
+      value: enteredDescription,
       required: true,
       minLength: 5,
     };
@@ -249,17 +391,17 @@ class ProjectInput {
     if (
       //   // 各項目の空白チェック
       //   enteredTitle.trim().length === 0 ||
-      //   enteredDescripor.trim().length === 0 ||
+      //   enteredDescription.trim().length === 0 ||
       //   enteredManday.trim().length === 0
       // 上記の改善Ver
       !validate(titleValidatable) ||
-      !validate(descriptorValidatable) ||
+      !validate(descriptionValidatable) ||
       !validate(mandayValidatable)
     ) {
       alert("入力値が正しくありません。再度お試しください。");
       return;
     } else {
-      return [enteredTitle, enteredDescripor, +enteredManday];
+      return [enteredTitle, enteredDescription, +enteredManday];
     }
   }
 
@@ -281,20 +423,6 @@ class ProjectInput {
       projectState.addProject(title, desc, manday);
       this.clearInputs();
     }
-  }
-
-  // メソッドの追加
-  private configure() {
-    // イベントリスナーの設定
-    // フォームがsubmitされたらsubmitHandlerが呼ばれる
-    // this.element.addEventListener("submit", this.submitHandler.bind(this));
-    this.element.addEventListener("submit", this.submitHandler);
-  }
-
-  // メソッドの作成
-  private attach() {
-    // hostElementに要素を追加する
-    this.hostElement.insertAdjacentElement("afterbegin", this.element);
   }
 }
 
