@@ -19,10 +19,13 @@ export class CheckSkipService {
     if (difference < 30) {
       isSkip = true;
     }
+    if (difference > 30) {
+      isSkip;
+    }
     return isSkip;
   }
 }
 
 // let hoge: CheckSkipService;
-// const checkSkipService = new CheckSkipService();
-// console.log(checkSkipService.skipCheck());
+const checkSkipService = new CheckSkipService();
+console.log(checkSkipService.skipCheck());

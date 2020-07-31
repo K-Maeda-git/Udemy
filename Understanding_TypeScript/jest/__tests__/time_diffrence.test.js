@@ -1,4 +1,4 @@
-import { CheckSkipService } from "../time_diffrence";
+import { CheckSkipService } from "../src/time_diffrence";
 
 // const checkSkipService = new CheckSkipService();
 

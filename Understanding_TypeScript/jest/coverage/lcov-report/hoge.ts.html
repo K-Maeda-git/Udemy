@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for time_diffrence.js</title>
+    <title>Code coverage report for hoge.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> time_diffrence.js</h1>
+        <h1><a href="index.html">All files</a> hoge.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,74 +91,80 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-exports.__esModule = true;
-exports.CheckSkipService = void 0;
-var CheckSkipService = /** @class */ (function () {
-  function CheckSkipService() {}
-  CheckSkipService.prototype.nowDay = function (set) {
-    // let isSkip: boolean;
-    //現在日時取得
-    var now = new Date();
-    var now_ms = now.getTime();
-    // セットされた日時2020/07/1711:00
-    // const set:Date;
-    var set_ms = set.getTime();
-    console.log("checkPoint" + set_ms);
-    //1分＝1000ミリ秒×60秒
-    var minutes = 1000 * 60;
-    //現在日時のミリ秒を「分」に換算する
-    var now_mm = now_ms / minutes;
-    var set_mm = set_ms / minutes;
-    // console.log("now：" + typeof now);
-    // console.log("now_ms：" + typeof now_ms);
-    // console.log("now_mm：" + typeof now_mm);
-    /**
-     * @param difference [分]の差分
-     */
-    var difference = now_mm - set_mm;
-    console.log(difference);
-  };
-  return CheckSkipService;
-})();
-exports.CheckSkipService = CheckSkipService;
-var getDay = new CheckSkipService();
-getDay.nowDay(new Date(2020, 6, 20, 16, 45));
-// skipCheck(difference);
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class ContractInfoBillMailRequest {
+  readonly request: string;
+&nbsp;
+  constructor(request: string) {
+    this.request = request;
+  }
+&nbsp;
+  toBoolean(): boolean {
+    return this.request === "1";
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  static </span>fromBoolean(bool: boolean): ContractInfoBillMailRequest {
+<span class="cstat-no" title="statement not covered" >    if (bool) {</span>
+<span class="cstat-no" title="statement not covered" >      return new ContractInfoBillMailRequest(</span>"1");
+      // } else {
+      // return new ContractInfoBillMailRequest("0");
+      // }
+    }
+<span class="cstat-no" title="statement not covered" >    return new ContractInfoBillMailRequest("0")</span>;
+  }
+}
+&nbsp;
+const contractInfoBillMailRequest = new ContractInfoBillMailRequest("1");
+console.log(contractInfoBillMailRequest.toBoolean());
+&nbsp;
+// if (条件文a1 || 条件文a2) {
+//   // 判定条件A
+//   命令文X;
+// }
+&nbsp;
+// if (条件文b1 || 条件文b2) {
+//   // 判定条件B
+//   命令文Y;
+// } else {
+//   命令文Z;
+// }
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -166,7 +172,7 @@ getDay.nowDay(new Date(2020, 6, 20, 16, 45));
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jul 30 2020 19:45:03 GMT+0900 (GMT+09:00)
+                at Thu Jul 30 2020 19:42:11 GMT+0900 (GMT+09:00)
             </div>
         </div>
         <script src="prettify.js"></script>

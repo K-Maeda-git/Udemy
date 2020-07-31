@@ -8,8 +8,9 @@
 2020/07/19 -> 進行：section5-66/次回：section5-67  
 2020/07/19 -> 進行：section5-70/次回：section5-71  
 2020/07/24 -> 進行：section7-97/次回：section7-98  
-2020/07/25 -> 進行：section8-118/次回：section9-119
-2020/07/27 -> 進行：section9-127/次回：section9-128
+2020/07/25 -> 進行：section8-118/次回：section9-119  
+2020/07/27 -> 進行：section9-127/次回：section9-128  
+2020/07/28 -> 進行：section9-135/次回：section9-136
 
 # udemy 学習メモ
 

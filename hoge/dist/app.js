@@ -1,27 +1,30 @@
 "use strict";
-class Check {
-    constructor() {
-        this.isSkip = false;
-        this.minutes = 1000 * 60;
-        this.now = new Date();
-        this.now_ms = this.now.getTime();
-        this.now_mm = this.now_ms / this.minutes;
-        this.set = new Date(2020, 6, 20, 16, 45);
-        this.set_ms = this.set.getTime();
-        this.set_mm = this.set_ms / this.minutes;
-    }
-    logcheck() {
-        console.log(this.isSkip);
-        console.log(this.minutes);
-        console.log(this.now);
-        console.log(this.now_ms);
-        console.log(this.now_mm);
-        console.log(this.set);
-        console.log(this.set_ms);
-        console.log(this.set_mm);
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+class CheckSkipService {
+    skipCheck() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let isSkip = false;
+            const minutes = 1000 * 60;
+            const today = new Date().getTime();
+            const todaymm = today / minutes;
+            const auth = new Date(2020, 6, 27, 17, 30).getTime();
+            const authmm = auth / minutes;
+            const difference = todaymm - authmm;
+            if (difference < 30) {
+                isSkip = true;
+            }
+            return isSkip;
+        });
     }
 }
-let hoge;
-hoge = new Check();
-hoge.logcheck();
+const checkSkipService = new CheckSkipService();
+console.log(checkSkipService.skipCheck());
 //# sourceMappingURL=app.js.map
