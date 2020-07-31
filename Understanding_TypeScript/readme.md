@@ -51,6 +51,11 @@
    ```
    npm install --save-dev lite-server
    ```
+   ※ インストールが失敗するときは以下を試してみる     
+   ```
+   npm install -g npm
+   ```
+
 4. package.json を編集する  
    `package.json`内の script を以下に変更する
    ```
@@ -63,6 +68,23 @@
 ---
 
 ### プロジェクトの実行方法
+
+#### 初めてサーバーを起動する場合は以下の初期設定でポート番号を変更する    
+   デバッグを開始するために必要な初期設定  
+   「VSCodeの実行＞デバッグの開始」を選択    
+   最初に開始した際は環境の選択を求められるので「chrome」を選択   
+   `launch.json`が自動生成されるので以下のようにurlのポート番号を変更する   
+   ※デバッグを開始する前に予めサーバーを起動しておく必要がある（npm startでlite serverを起動しておく）    
+   ```
+   "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:3000", // 開発用サーバーで起動する番号に合わせる
+            "webRoot": "${workspaceFolder}"
+        }
+   ```     
 
 1. `cd`でプロジェクトのディレクトリへ移動
 
