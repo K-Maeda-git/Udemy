@@ -11,6 +11,8 @@
 2020/07/25 -> 進行：section8-118/次回：section9-119  
 2020/07/27 -> 進行：section9-127/次回：section9-128  
 2020/07/28 -> 進行：section9-135/次回：section9-136
+2020/08/01 -> 進行：section9-142/次回：section9-143      
+2020/08/02 -> 進行：section9-158/次回：section10-159     
 
 # udemy 学習メモ
 
