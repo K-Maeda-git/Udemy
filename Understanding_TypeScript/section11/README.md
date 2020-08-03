@@ -155,5 +155,5 @@
    8. npm run buildを実施
       本番用アプリケーションコードがビルドされる
       ```
-      npm run build`
+      npm run build
       ```
