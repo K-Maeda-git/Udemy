@@ -11,8 +11,10 @@
 2020/07/25 -> 進行：section8-118/次回：section9-119  
 2020/07/27 -> 進行：section9-127/次回：section9-128  
 2020/07/28 -> 進行：section9-135/次回：section9-136
-2020/08/01 -> 進行：section9-142/次回：section9-143      
-2020/08/02 -> 進行：section9-158/次回：section10-159     
+2020/08/01 -> 進行：section9-142/次回：section9-143  
+2020/08/02 -> 進行：section11-158/次回：section12-159  
+2020/08/03 -> 進行：section12-165/次回：section13-166  
+2020/08/04 -> 進行：section13-173/次回：section14-174
 
 # udemy 学習メモ
 
@@ -46,14 +48,19 @@
 
 3. npm を用意する  
    以下コマンドを実行して`package.json`を作成
+
    ```
    npm init -y
    ```
+
    続けて以下コマンドを実行して、`lite-server`をインストール
+
    ```
    npm install --save-dev lite-server
    ```
-   ※ インストールが失敗するときは以下を試してみる     
+
+   ※ インストールが失敗するときは以下を試してみる
+
    ```
    npm install -g npm
    ```
@@ -71,22 +78,24 @@
 
 ### プロジェクトの実行方法
 
-#### 初めてサーバーを起動する場合は以下の初期設定でポート番号を変更する    
-   デバッグを開始するために必要な初期設定  
-   「VSCodeの実行＞デバッグの開始」を選択    
-   最初に開始した際は環境の選択を求められるので「chrome」を選択   
-   `launch.json`が自動生成されるので以下のようにurlのポート番号を変更する   
-   ※デバッグを開始する前に予めサーバーを起動しておく必要がある（npm startでlite serverを起動しておく）    
-   ```
-   "configurations": [
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000", // 開発用サーバーで起動する番号に合わせる
-            "webRoot": "${workspaceFolder}"
-        }
-   ```     
+#### 初めてサーバーを起動する場合は以下の初期設定でポート番号を変更する
+
+デバッグを開始するために必要な初期設定  
+ 「VSCode の実行＞デバッグの開始」を選択  
+ 最初に開始した際は環境の選択を求められるので「chrome」を選択  
+ `launch.json`が自動生成されるので以下のように url のポート番号を変更する  
+ ※デバッグを開始する前に予めサーバーを起動しておく必要がある（npm start で lite server を起動しておく）
+
+```
+"configurations": [
+     {
+         "type": "chrome",
+         "request": "launch",
+         "name": "Launch Chrome against localhost",
+         "url": "http://localhost:3000", // 開発用サーバーで起動する番号に合わせる
+         "webRoot": "${workspaceFolder}"
+     }
+```
 
 1. `cd`でプロジェクトのディレクトリへ移動
 
