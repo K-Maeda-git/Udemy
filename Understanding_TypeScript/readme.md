@@ -1,3 +1,5 @@
+# [【世界で 7 万人が受講】Understanding TypeScript - 2020 年最新版](https://www.udemy.com/share/103e4OCUMecllVRno=/)
+
 ## 進捗状況
 
 2020/07/07 -> 進行：section1-8/次回：section2-1  
@@ -14,9 +16,8 @@
 2020/08/01 -> 進行：section9-142/次回：section9-143  
 2020/08/02 -> 進行：section11-158/次回：section12-159  
 2020/08/03 -> 進行：section12-165/次回：section13-166  
-2020/08/04 -> 進行：section13-173/次回：section14-174
-
-# udemy 学習メモ
+2020/08/04 -> 進行：section13-173/次回：section14-174  
+2020/08/13 -> 進行：section16-196/次回：END
 
 ## [VSCode]開発環境構築メモ
 
