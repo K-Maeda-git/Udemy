@@ -1,3 +1,5 @@
+// 線グラフ
+
 import React from "react";
 // Bar:縦方向 HorizontalBar:横方向
 import { Bar, HorizontalBar } from "react-chartjs-2";

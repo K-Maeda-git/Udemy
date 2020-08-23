@@ -1,3 +1,5 @@
+// 円グラフ
+
 import React from "react";
 import { Pie, Doughnut } from "react-chartjs-2";
 
