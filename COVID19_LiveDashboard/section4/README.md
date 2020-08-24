@@ -1,17 +1,32 @@
-# [section3]Material UI
+# [section4]「グローバル時系列 COVID19 API」コロナウイルス Dashboard アプリ
 
 ## 開発環境の準備
 
+- プロジェクトの作成  
+  `npx create-react-app . --template redux-typescript`
+- ローカルサーバーの起動  
+  `npm start`
+
 ### 各種ツールのインストール
 
-- [[MATERIAL-UI](https://material-ui.com/)]React で利用できるマテリアルデザインの CSS フレームワーク  
+- [ライブラリ]axios  
+  `npm install axios`
+- [ライブラリ]material-ui  
   `npm install @material-ui/core`
+- [ライブラリ]chart.js --save  
+  `npm install chart.js --save`
+- [ライブラリ]react-chart.js2  
+  `npm install react-chartjs2`
+- [ライブラリ]react-countup  
+  `npm install react-countup`
+- [ライブラリ]react-icons  
+  `npm install react-icons`
 
 ---
 
 # README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
 

@@ -1,12 +1,17 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import MaterialUI from "./components/MaterialUI";
+import React from 'react';
+import logo from './logo.svg';
+import { Counter } from './features/counter/Counter';
+import './App.css';
+import Cards from './features/covid/Cards/Cards';
+import Chart from './features/covid/Chart/Chart';
 
 function App() {
   return (
     <div className="App">
-      <MaterialUI />
+      <header className="App-header">
+        <Cards />
+        <Chart />
+      </header>
     </div>
   );
 }
