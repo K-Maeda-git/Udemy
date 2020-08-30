@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { RootState } from "./../../app/store";
+import { RootState } from "../../app/store";
 import dataJson from "./data.json";
 import dataJsonDaily from "./dataDaily.json";
 
@@ -114,7 +114,7 @@ const covidSlice = createSlice({
     builder.addCase(fetchAsyncGetDaily.fulfilled, (state, action) => {
       return {
         ...state,
-        DailyData: action.payload,
+        dailyData: action.payload,
       };
     });
     builder.addCase(fetchAsyncGetCountry.fulfilled, (state, action) => {

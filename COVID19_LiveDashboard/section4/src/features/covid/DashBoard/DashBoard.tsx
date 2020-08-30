@@ -52,7 +52,7 @@ const DashBoard: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Container className={classes.content}>
-        <div className={styles.content}>
+        <div className={styles.container}>
           <SwitchCountry />
         </div>
         <Grid container spacing={3}>
