@@ -1,4 +1,8 @@
-# [section5]「国別時系列 COVID 19 API」 コロナウイルスDashBoardアプリ
+# [section5]「国別時系列 COVID 19 API」 コロナウイルス DashBoard アプリ
+
+## 成果物   
+- Firebaseの公開リンク    
+  https://covid-dashboard-api-dd4fc.web.app/
 
 ## 開発環境の準備
 
@@ -15,12 +19,49 @@
   `npm install @material-ui/core`
 - [ライブラリ]chart.js --save  
   `npm install chart.js --save`
-- [ライブラリ]react-chart.js2  
-  `npm install react-chartjs2`
+- [ライブラリ]react-chart.js-2  
+  `npm install react-chartjs-2`
 - [ライブラリ]react-countup  
   `npm install react-countup`
 - [ライブラリ]react-icons  
   `npm install react-icons`
+
+### Firebase でデプロイ
+
+[firebase コンソール](https://console.firebase.google.com/project/covid-dashboard-api-dd4fc/overview)  開発＞ Hosting ＞始める
+
+- プロジェクトをビルドする
+  ビルドするとプロジェクト直下に「build」フォルダが作られる  
+  `npm run build`
+
+- Firebase CLI(コマンドラインツール)のインストール  
+  `npm install -g firebase-tools`
+
+- プロジェクトの初期化    
+  - ログイン    
+  `firebase login`   
+  - 開始    
+  下記コマンドを実行    
+  `firebase init`  
+  [y]を選択   
+  `? Are you ready to proceed? Yes`  
+  [Hosting: Configure and deploy Firebase Hosting sites]を矢印キーとspaceキーで選択して、Enterキーで決定する    
+  `? Which Firebase CLI features do you want to set up for this folder? Press Space to select features, then Enter to confirm your choices. Hosting: Configure and deploy Firebase Hosting sites`
+  [use an existing project]を選択する   
+  `? Please select an option: Use an existing project`    
+  firebaseで作成したプロジェクトを選択する    
+  `? Select a default Firebase project for this directory: covid-dashboard-api-dd4fc (covid-dashboard-api)`   
+  [build]と入力してフォルダを指定   
+  `? What do you want to use as your public directory? build`   
+  [y]を選択   
+  `? Configure as a single-page app (rewrite all urls to /index.html)? Yes`   
+  [N]を選択   
+  `? File build/index.html already exists. Overwrite? No`   
+  完了    
+  `+  Firebase initialization complete!`    
+  - デプロイ    
+  `firebase deploy`
+  
 
 ---
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import dataDaily from "./apiDataDaily.json";
 
 // apiのURL
-const apiUrl = "https://api.covid19api.com/total/country/";
+const apiUrl ="https://api.covid19api.com/total/country";
 
 // jsonのデータ型を取得
 type DATADAILY = typeof dataDaily;
