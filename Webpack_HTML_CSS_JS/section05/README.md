@@ -9,7 +9,9 @@
 ## プラグインの追加     
 - mini-css-extract-plugin     
    section04の手順だけだとHTMLファイルにcss情報がインジェクトされてしまうのでプラグインを追加してCSSを別のファイルとして出力する
+   インストールしたら`webpack.config`で設定が必要     
    `npm install --save-dev mini-css-extract-plugin@0.9.0`
 - html-webpack-plugin      
    ビルド時にhtmlファイルをdistフォルダに自動生成する    
+   インストールしたら`webpack.config`で設定が必要     
    `npm install --save-dev html-webpack-plugin@3.2.0`
