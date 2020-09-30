@@ -8,11 +8,3 @@
   `npx webpack --mode development`
 
 ## ライブラリの追加
-
-- url-loader  
-  ファイルを base64URI に変換する  
-  `npm install --save-dev url-loader@3.0.0`
-
-- file-loader  
-  ファイルを外部ファイルとして出力する  
-  `npm install --save-dev file-loader@5.1.0`

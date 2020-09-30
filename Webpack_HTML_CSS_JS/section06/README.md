@@ -6,5 +6,3 @@
    development は開発用、production は本番環境用（ファイルサイズを小さくしてパフォーマンスを向上する）      
   `npx webpack --mode development`
 
-## プラグインの追加     
-- 
