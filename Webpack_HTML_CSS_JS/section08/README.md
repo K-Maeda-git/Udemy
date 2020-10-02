@@ -8,3 +8,10 @@
   `npx webpack --mode development`
 
 ## ライブラリの追加
+
+- pug   
+  通常の HTML だけではできない共通化が可能    
+  'npm install --save-dev pug-html-loader@1.1.5'    
+- html-loader   
+  'npm install --save-dev html-loader@0.5.5'    
+  

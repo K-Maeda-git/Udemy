@@ -53,6 +53,22 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.pug/,
+        use: [
+          {
+            // html-loaderの設定
+            loader: "html-loader",
+          },
+          {
+            // pug-html-loaderの設定
+            loader: "pug-html-loader",
+            options: {
+              pretty: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -64,7 +80,14 @@ module.exports = {
     // ②html-webpack-pluginの設定
     new HtmlWebpackPlugin({
       // 参照元のパスを指定
-      template: "./src/templates/index.html",
+      template: "./src/templates/index.pug",
+      filename: 'index.html',
+    }),
+    // ②html-webpack-pluginの設定
+    new HtmlWebpackPlugin({
+      // 参照元のパスを指定
+      template: "./src/templates/access.pug",
+      filename: 'access.html'
     }),
     // ②clean-webpack-pluginの設定
     new CleanWebpackPlugin(),
