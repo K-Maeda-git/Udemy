@@ -18,4 +18,7 @@
 
 ## ライブラリの追加
 
-- 
+- node-sass   
+`npm install --save-dev node-sass@4.13.1`
+- sass-loader   
+`npm install --save-dev sass-loader@8.0.2`
