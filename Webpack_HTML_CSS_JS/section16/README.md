@@ -1,4 +1,4 @@
-# [section16]Typescriptのビルド設定
+# [section16]Typescript のビルド設定
 
 ## コマンド
 
@@ -24,11 +24,13 @@
 
 - typescript
   `npm install --save-dev typescript@3.8.3`
-- ts-loader   
+- ts-loader  
   `npm install --save-dev ts-loader@6.2.1`
-- @types/react    
+- @types/react  
   `npm install --save-dev @types/react@16.9.23`
 
 ## memo
 
--
+- [tsconfig.json]について  
+  ファイル作成時エラーが出ることがあるが、.ts ファイルを作成するとエラーは解消される。  
+  ※解消されない場合は VSCode を再起動してみる
