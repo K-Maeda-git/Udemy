@@ -1,0 +1,30 @@
+// scssの読み込み
+@import "./footer.scss";
+
+// 引数を変数として使用することができる（関数的な使い方）
+@mixin set-margin($direction, $value) {
+  margin-#{$direction}: $value;
+}
+
+body {
+  color: lightblue;
+}
+
+// 変数定義
+$primary-color: orange;
+
+.content {
+  // ネスト（入れ子）
+  .title {
+    font-size: 24px;
+    // 変数の利用
+    color: $primary-color;
+  }
+  .title-lg {
+    // titleで指定した情報を拡張する
+    @extend .title;
+    font-size: 32px;
+  }
+  // 引数として渡している
+  @include set-margin(right, 16px);
+}
