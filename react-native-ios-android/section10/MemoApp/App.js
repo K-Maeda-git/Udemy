@@ -4,8 +4,7 @@ import { StyleSheet, View } from "react-native";
 
 // import BodyText from "./src/elements/BodyText";
 import Appbar from "./src/components/Appbar";
-import MemoList from "./src/components/MemoList";
-import CircleButton from "./src/elements/CircleButton";
+import MemoListScreen from "./src/screens/MemoListScreen";
 
 export default function App() {
   return (
@@ -13,8 +12,7 @@ export default function App() {
       <StatusBar style="auto" />
       {/* <BodyText>Hello React!</BodyText> */}
       <Appbar />
-      <MemoList />
-      <CircleButton>+</CircleButton>
+      <MemoListScreen />
     </View>
   );
 }
