@@ -13,7 +13,7 @@
     Xcode>Open Developer Tool>Simulator
   - android エミュレーター  
     下記画像でエミュレーター起動後下記コマンドを実施してエミュレーターがネットワークに接続できるようにする  
-    ※コマンド実施する際のディレクトリは作成したプロジェクトで行う  
+    ※コマンド実施する際はandroidstudioで作成したプロジェクトのディレクトリで行う  
     `emulator -list-avds`
     `emulator -avd Pixel_3a_API_30_x86 -dns-server 8.8.8.8`
     <img src="./image/androidエミュレーターの起動.png">
@@ -50,42 +50,41 @@
     [Expo Client](https://apps.apple.com/jp/app/expo-client/id982107779)
   - プロジェクトを立ち上げる  
     下記コマンドでプロジェクトを立ち上げて表示される QR コードを読み取る
-    ※コンソール画面のCONNECTIONが「LAN」でありかつPC、スマホが同じネットワーク内にいる必要があるので注意が必要    
+    ※コンソール画面の CONNECTION が「LAN」でありかつ PC、スマホが同じネットワーク内にいる必要があるので注意が必要
 
     ```
     npm start
     ```
 
-## expo 利用時の注意点    
-  ネットワークに接続している状態でないと`npm start`などした際にシミュレーターを動かすことができない。   
-  だがコマンドに下記オプションをつけてプロジェクトを立ち上げることでオフライン状態でシミュレーターを動かすことができ、なおかつJavaScriptの実行が高速となる    
+## expo 利用時の注意点
+
+ネットワークに接続している状態でないと`npm start`などした際にシミュレーターを動かすことができない。  
+ だがコマンドに下記オプションをつけてプロジェクトを立ち上げることでオフライン状態でシミュレーターを動かすことができ、なおかつ JavaScript の実行が高速となる
+
+```
+npm start --ofline
+```
+
+## expo シミュレーター内でのオプション
+
+- iOS
   ```
-  npm start --ofline
+  cmd+D
+  ```
+- android
+  ```
+  cmd+M
   ```
 
-## expo シミュレーター内でのオプション   
-  - iOS   
-    ```   
-    cmd+D   
-    ```       
-  - android   
-    ```   
-    cmd+M   
-    ```     
+## ライブラリのインストール
 
-## ライブラリのインストール   
-  - ESLint   
-    下記コマンドでライブラリをプロジェクトにインストールする    
-    ```   
-    npm install --save-dev eslint babel-eslint eslint-config-airbnb   
-    ```
+- ESLint  
+  下記コマンドでライブラリをプロジェクトにインストールする
 
-    ```
-    npm install --save-dev eslint-plugin-import eslint-plugin-jsx-ally eslint-plugin-react
-    ```
+  ```
+  npm install --save-dev eslint babel-eslint eslint-config-airbnb
+  ```
 
-
-
-
-
-     <img src="./image/androidエミュレーターの起動.png" width=30%>
+  ```
+  npm install --save-dev eslint-plugin-import eslint-plugin-jsx-ally eslint-plugin-react
+  ```

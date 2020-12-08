@@ -42,16 +42,10 @@
 
       `emurator`と入力して  
        `emulator: ERROR:〜named 'foo'`と出力されることを確認する  
-       `adb`と入力して各種情報が出力されることを確認する    
-    - androidエミュレーターを使用するための準備   
-      android studioでプロジェクトを新規に作成する    
-      ※エミュレーターを利用するためのプロジェクトなので作成するだけで良い   
-    - androidエミュレーターを起動する   
+       `adb`と入力して各種情報が出力されることを確認する
+
+    - android エミュレーターを使用するための準備  
+      android studio でプロジェクトを新規に作成する  
+      ※エミュレーターを利用するためのプロジェクトなので作成するだけで良い
+    - android エミュレーターを起動する  
       <img src="./image/androidエミュレーターの起動.png">
-
-
-
-      
-      <img src="./image/androidエミュレーターの起動.png" width=30%>
-
-
