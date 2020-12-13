@@ -4,7 +4,11 @@ import { StyleSheet, View } from "react-native";
 
 // import BodyText from "./src/elements/BodyText";
 import Appbar from "./src/components/Appbar";
-import MemoListScreen from "./src/screens/MemoListScreen";
+// import MemoListScreen from "./src/screens/MemoListScreen";
+// import MemoDateilScreen from "./src/screens/MemoDateilScreen";
+// import MemoEditScreen from "./src/screens/MemoEditScreen";
+// import LoginScreen from "./src/screens/LoginScreen";
+import SignupScreen from "./src/screens/SignupScreen";
 
 export default function App() {
   return (
@@ -12,7 +16,11 @@ export default function App() {
       <StatusBar style="auto" />
       {/* <BodyText>Hello React!</BodyText> */}
       <Appbar />
-      <MemoListScreen />
+      {/* <MemoListScreen /> */}
+      {/* <MemoDateilScreen /> */}
+      {/* <MemoEditScreen /> */}
+      {/* <LoginScreen /> */}
+      <SignupScreen />
     </View>
   );
 }

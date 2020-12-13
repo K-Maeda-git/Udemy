@@ -9,7 +9,7 @@ class MemoListScreen extends React.Component {
     return (
       <View style={styles.conteiner}>
         <MemoList />
-        <CircleButton>+</CircleButton>
+        <CircleButton name="plus" />
       </View>
     );
   }
@@ -18,7 +18,7 @@ class MemoListScreen extends React.Component {
 const styles = StyleSheet.create({
   conteiner: {
     flex: 1,
-    width: '100%',
+    width: "100%",
   },
 });
 

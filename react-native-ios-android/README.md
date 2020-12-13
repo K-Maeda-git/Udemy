@@ -4,7 +4,7 @@
 
 2020/12/05 -> 進行：section04/次回：section05
 2020/12/07 -> 進行：section08/次回：section09
-2020/12/08 -> 進行：section08/次回：section09
+2020/12/08 -> 進行：section10/次回：section11
 
 ## 学習前の準備
 
