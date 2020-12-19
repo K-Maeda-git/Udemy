@@ -5,6 +5,8 @@
 2020/12/05 -> 進行：section04/次回：section05
 2020/12/07 -> 進行：section08/次回：section09
 2020/12/08 -> 進行：section10/次回：section11
+2020/12/13 -> 進行：section10/次回：section12
+2020/12/19 -> 進行：section13/次回：section14
 
 ## 学習前の準備
 
@@ -29,3 +31,5 @@
   npm run ios // プロジェクトを立ち上げる際にiosシミュレーターでも開く
   npm run android // プロジェクトを立ち上げる際にandroidエミュレーターでも開く
   ```
+
+- [Firebass Authentication](https://console.firebase.google.com/project/react-native-ios-android-a1fe7/authentication/users?hl=ja)
