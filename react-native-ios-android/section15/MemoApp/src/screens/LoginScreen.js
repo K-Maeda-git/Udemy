@@ -10,8 +10,8 @@ import {
 
 class LoginScreen extends React.Component {
   state = {
-    email: "",
-    password: "",
+    email: "user1@example.com",
+    password: "password",
   };
 
   handleSubmit() {
@@ -21,7 +21,7 @@ class LoginScreen extends React.Component {
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       // Sign in完了後ホームへ遷移する
       .then(({ user }) => {
-        this.props.navigation.navigate("Home",{ currentUser: user });
+        this.props.navigation.navigate("Home");
         console.log("success", user);
       })
       .catch((error) => {

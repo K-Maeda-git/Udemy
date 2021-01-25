@@ -1,41 +1,36 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
+const dateString = (date) => {
+  if (date == null) { return ''; }
+  // firebaseのTimestamp型をDate型に変換する
+  const dateObject = date.toDate();
+  return dateObject.toISOString().split('T')[0];
+};
 class MemoList extends React.Component {
+  renderMemo({ item }) {
+    console.log(item);
+    return (
+      <TouchableHighlight
+        onPress={() => {
+          this.props.navigation.navigate("MemoDetail");
+        }}
+      >
+        <View style={styles.memoListItem}>
+          <Text style={styles.memoListTitle}>{item.body}</Text>
+          <Text style={styles.memoListDate}>2020/12/08</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
   render() {
     return (
       <View style={styles.memoList}>
-        <TouchableHighlight
-          onPress={() => {
-            this.props.navigation.navigate("MemoDetail");
-          }}
-        >
-          <View style={styles.memoListItem}>
-            <Text style={styles.memoListTitle}>講座のアイテム</Text>
-            <Text style={styles.memoListDate}>2020/12/08</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => {
-            this.props.navigation.navigate("MemoDetail");
-          }}
-        >
-          <View style={styles.memoListItem}>
-            <Text style={styles.memoListTitle}>講座のアイテム</Text>
-            <Text style={styles.memoListDate}>2020/12/08</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
-          onPress={() => {
-            this.props.navigation.navigate("MemoDetail");
-          }}
-        >
-          <View style={styles.memoListItem}>
-            <Text style={styles.memoListTitle}>講座のアイテム</Text>
-            <Text style={styles.memoListDate}>2020/12/08</Text>
-          </View>
-        </TouchableHighlight>
+        <FlatList
+          data={this.props.memoList}
+          renderItem={this.renderMemo.bind(this)}
+        />
       </View>
     );
   }

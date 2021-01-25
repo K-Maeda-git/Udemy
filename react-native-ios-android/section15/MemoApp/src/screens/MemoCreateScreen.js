@@ -6,22 +6,24 @@ import CircleButton from "../elements/CircleButton";
 
 class MemoCreateScreen extends React.Component {
   state = {
-    body: '',
-  }
+    body: "",
+  };
 
-  handlePress(){
-    const {params} = this.props.navigation.state;
+  handlePress() {
     const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
     console.log(db);
-    db.collection(`users/${params.currentUser.uid}/memos`).add({
-      body: this.state.body,
-      createdOn: new Date(),
-    })
+    // firebaseから直接取得する
+    db.collection(`users/${currentUser.uid}/memos`)
+      .add({
+        body: this.state.body,
+        createdOn: new Date(),
+      })
       .then((docRef) => {
-        console.log('success',docRef.id);
+        console.log("success", docRef.id);
       })
       .catch((error) => {
-        console.log('error',error);
+        console.log("error", error);
       });
   }
 
@@ -39,9 +41,9 @@ class MemoCreateScreen extends React.Component {
         <CircleButton
           name="check"
           onPress={this.handlePress.bind(this)}
-        //   onPress={() => {
-        //     this.props.navigation.goBack();
-        //   }}
+          //   onPress={() => {
+          //     this.props.navigation.goBack();
+          //   }}
         />
       </View>
     );
